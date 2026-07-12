@@ -1,0 +1,119 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
+= Tri-Perimeter Contribution Framework
+Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+:toc:
+:sectnums:
+
+[abstract]
+== Abstract
+
+This framework generalises the contribution model for software engineering,
+infrastructure, and open-source ecosystems. It separates openness to contribution
+from authority to alter trust roots. The three perimeters govern landing and review
+authority; they do not assign copyright and do not replace the Contributor
+Participation Agreement.
+
+== 1. Perimeter 1 — Core
+
+Perimeter 1 contains estate or repository trust roots and high-consequence areas.
+Examples include:
+
+* standards and normative specifications;
+* signing, release, provenance, and canonical-identity machinery;
+* contractiles, descriptiles, governance, CODEOWNERS, and security policy;
+* proof kernels, trusted checkers, ABI specifications, and unsafe boundaries;
+* credential, authority, and obliterative-operation code;
+* production deployment and data-migration controls.
+
+Rules:
+
+* Maintainer or explicitly delegated core steward approval is required.
+* Automated agents may inspect and propose changes but SHALL NOT independently merge
+  or publish them.
+* Changes require the relevant proof, test, bench, audit, and downstream impact
+  review.
+* Exceptions are recorded, scoped, expiring, and independently reviewable.
+
+== 2. Perimeter 2 — Trusted
+
+Perimeter 2 contains substantive implementation, libraries, tests, documentation,
+integrations, and tooling whose failure is bounded but material.
+
+Rules:
+
+* Vetted contributors may author and review according to CODEOWNERS and repository
+  policy.
+* Review depth is determined by the affected assurance planes and blast radius.
+* AI assistance, generated code, third-party material, and provenance SHALL be
+  disclosed where material.
+* Movement from Perimeter 2 into Perimeter 1 requires explicit reclassification and
+  core review.
+
+== 3. Perimeter 3 — Community Sandbox
+
+Perimeter 3 is the open contribution surface for community scripts, non-normative
+examples, feature prototypes, unofficial tooling plugins, documentation improvements,
+test cases, and other bounded work.
+
+Rules:
+
+* Public contribution is welcomed.
+* Sandbox work is not implicitly trusted, supported, secure, canonical, or suitable
+  for production.
+* Promotion to Perimeter 2 or 1 requires review, provenance, licensing, and the
+  evidence appropriate to the destination.
+* The project SHALL avoid presenting sandbox inclusion as endorsement or proof.
+
+== 4. Orthogonal axes
+
+Perimeter is independent of:
+
+* contributor identity or social status;
+* copyright ownership;
+* licence and patent permission;
+* evidence status;
+* repository lifecycle;
+* security-impact class;
+* whether the work was human, AI-assisted, mechanical, or mixed.
+
+A highly experienced contributor can submit Perimeter 3 work. A first-time
+contributor can propose a Perimeter 1 correction, although the landing controls are
+stricter.
+
+== 5. Contribution routes
+
+Every repository SHOULD identify:
+
+* default perimeter by path;
+* paths requiring explicit classification;
+* promotion criteria;
+* reviewers and escalation route;
+* evidence and contributor-agreement requirements;
+* how a contribution can be marked "Not a Contribution";
+* how rejected work and retained provenance are handled.
+
+== 6. Humane contribution
+
+The framework SHALL NOT turn contribution into a maze of hidden authority. A
+contributor SHOULD be told:
+
+* where their work currently sits;
+* what is needed for promotion;
+* whether the issue is rights, evidence, architecture, or maintenance capacity;
+* what remains theirs;
+* what record will be retained;
+* how to contest a classification or decision.
+
+== 7. AI and Generated Source
+
+Where one contribution is authored, refactored, transpiled, or generated through
+agentic assistance or cross-language bindings, the contribution record SHOULD preserve:
+
+* authoring agent/tooling context;
+* canonical representation;
+* generated representations;
+* human and agent transformations;
+* citations, comments, and provenance carried through `.affex` or equivalent;
+* known semantic loss and review responsibility.
+
+AI generation or transpilation SHALL NOT launder origin or imply independent human authorship.

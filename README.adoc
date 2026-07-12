@@ -8,6 +8,13 @@
 
 > 🚀 Help me to become a full-time open-source developer by [sponsoring me on GitHub](https://github.com/sponsors/messense)
 
+== Authorship & Acknowledgements
+**Original Author:** `messense` (rust-cross community)
+
+This tool's core cross-compilation bridge and logic were created by `messense`. We are incredibly grateful for their open-source contributions. This fork has been wrapped in enterprise-grade governance, containerized using Chainguard Wolfi, and adapted to conform with the internal Reproducible Systems & Reliability (RSR) standards by our internal estate maintainers.
+
+---
+
 Compile Cargo project with [zig](https://github.com/ziglang/zig) as [linker](https://andrewkelley.me/post/zig-cc-powerful-drop-in-replacement-gcc-clang.html) for
 [easier cross compiling](https://actually.fyi/posts/zig-makes-rust-cross-compilation-just-work/).
 
@@ -158,6 +165,62 @@ cargo zigbuild --target universal2-apple-darwin
 > **Note**
 >
 > Note that Cargo `--message-format` option doesn't work with universal2 target currently.
+
+## CI, Containerisation, and Mobile Testing
+
+For a robust, reproducible, and highly secure build environment, this repository utilizes a **Chainguard Wolfi** base image (`Containerfile`).
+
+By using Podman or Docker, you can encapsulate the entire cross-compilation matrix locally:
+
+```bash
+# Build the slim container image (No mobile toolchains)
+podman build -t cargo-zigbuild-slim -f Containerfile .
+
+# Build the mobile container image (Includes Android NDK & cargo-dinghy)
+podman build -t cargo-zigbuild-mobile -f Containerfile.mobile .
+
+# Cross-compile securely from the slim container
+podman run --rm -v $(pwd):/workspace -w /workspace \
+  --security-opt label=type:container_runtime_t \
+  --read-only --cap-drop=ALL \
+  cargo-zigbuild-slim cargo run zigbuild --target x86_64-pc-windows-gnu
+```
+
+### Mobile Testing (`cargo-dinghy`)
+Our `Containerfile.mobile` comes pre-packaged with `cargo-dinghy` and the Android NDK. This means you can run Rust test suites directly on mobile Android emulators/devices without the headache of native SDK setups!
+
+To test against an Android target using the mobile container:
+```bash
+podman run --rm -v $(pwd):/workspace -w /workspace cargo-zigbuild-mobile cargo dinghy test -d android
+```
+*(Note: iOS testing via dinghy must be executed natively on macOS).*
+
+## Using as an SDK (Library)
+
+`cargo-zigbuild` is engineered with a decoupled architecture. While it functions as a CLI tool, its core logic is exposed as a reusable Rust library crate! 
+
+If you are building your own developer tools, CI systems, or automation scripts, you can seamlessly integrate our cross-compilation bridge:
+
+1. **Add the dependency:**
+```toml
+[dependencies]
+cargo-zigbuild = "0.23.0"
+```
+
+2. **Programmatic Invocation:**
+```rust
+use cargo_zigbuild::Build;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut build_command = Build::new();
+    // Configure the target triple programmatically
+    build_command.target = vec!["aarch64-unknown-linux-gnu".to_string()];
+    
+    // Execute the cross-compilation bridge
+    build_command.execute()?;
+    Ok(())
+}
+```
 
 ## Caveats
 

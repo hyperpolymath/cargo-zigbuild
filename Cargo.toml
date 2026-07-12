@@ -8,7 +8,19 @@ keywords = ["zig", "cargo"]
 readme = "README.md"
 repository = "https://github.com/rust-cross/cargo-zigbuild"
 rust-version = "1.88"
-
+exclude = [
+    "/.machine_readable",
+    "/*.adoc",
+    "/Containerfile*",
+    "/Justfile",
+    "/guix.scm",
+    "/.github",
+    "/proofs",
+    "/scripts",
+    "/self-validating",
+    "/CITATION.cff",
+    "/0-AI-MANIFEST.a2ml"
+]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
@@ -43,4 +55,10 @@ inherits = "release"
 lto = "thin"
 
 [dev-dependencies]
+criterion = "0.8.2"
+proptest = "1.11.0"
 tempfile = "3.25.0"
+
+[[bench]]
+name = "zigbuild_bench"
+harness = false

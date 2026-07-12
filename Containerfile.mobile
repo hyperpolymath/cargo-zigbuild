@@ -1,0 +1,37 @@
+FROM cgr.dev/chainguard/rust:latest-dev
+
+USER root
+
+RUN apk update && apk add --no-cache \
+    curl \
+    xz \
+    git \
+    build-base \
+    unzip \
+    bash
+
+# Install Zig
+RUN curl -O https://ziglang.org/download/0.13.0/zig-linux-x86_64-0.13.0.tar.xz && \
+    tar xf zig-linux-x86_64-0.13.0.tar.xz && \
+    mv zig-linux-x86_64-0.13.0 /usr/local/zig && \
+    ln -s /usr/local/zig/zig /usr/local/bin/zig && \
+    rm zig-linux-x86_64-0.13.0.tar.xz
+
+USER nonroot
+
+# Install cargo-dinghy
+RUN cargo install cargo-dinghy
+
+USER root
+# Install Android NDK for cargo-dinghy
+RUN curl -O https://dl.google.com/android/repository/android-ndk-r26b-linux.zip && \
+    unzip -q android-ndk-r26b-linux.zip -d /opt/ && \
+    rm android-ndk-r26b-linux.zip && \
+    chown -R nonroot:nonroot /opt/android-ndk-r26b
+
+USER nonroot
+
+ENV ANDROID_NDK_HOME=/opt/android-ndk-r26b
+ENV SDKROOT=/opt/osxcross/SDK/MacOSX11.3.sdk
+
+CMD ["bash"]

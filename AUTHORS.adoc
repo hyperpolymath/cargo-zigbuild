@@ -1,0 +1,12 @@
+= Authorship & Acknowledgements
+
+== Original Author
+The core logic, CLI bridge, and heavy lifting of `cargo-zigbuild` was originally authored by **messense** and the **rust-cross** community.
+
+We are incredibly grateful for their open-source contributions. The cross-compilation ecosystem is significantly stronger because of their work.
+
+* **Upstream Repository:** https://github.com/rust-cross/cargo-zigbuild
+* **Original Author:** messense
+
+== Internal Maintainers (RSR Estate)
+This fork has been wrapped in enterprise-grade governance, containerized using Chainguard Wolfi, and adapted to conform with the internal Reproducible Systems & Reliability (RSR) standards by the internal estate maintainers.

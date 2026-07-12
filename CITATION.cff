@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "messense"
+  given-names: ""
+- name: "rust-cross"
+title: "cargo-zigbuild"
+version: 0.23.0
+date-released: "2024-05-01"
+url: "https://github.com/rust-cross/cargo-zigbuild"
+repository-code: "https://github.com/rust-cross/cargo-zigbuild"
+license: MIT
+keywords:
+  - "zig"
+  - "cargo"
+  - "cross-compilation"
+  - "rust"
