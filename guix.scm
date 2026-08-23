@@ -1,17 +1,21 @@
-; SPDX-License-Identifier: MPL-2.0
-;; guix.scm — GNU Guix package definition for cargo-zigbuild
-;; Usage: guix shell -f guix.scm
+;; SPDX-License-Identifier: MPL-2.0
+;; Guix development environment.
+;; Usage: guix shell -D -f guix.scm
 
 (use-modules (guix packages)
              (guix build-system gnu)
-             (guix licenses))
+             (guix licenses)
+             (gnu packages base)
+             (gnu packages bash)
+)
 
 (package
   (name "cargo-zigbuild")
   (version "0.1.0")
   (source #f)
   (build-system gnu-build-system)
+  (inputs (list coreutils bash ))
   (synopsis "cargo-zigbuild")
   (description "cargo-zigbuild — part of the hyperpolymath ecosystem.")
   (home-page "https://github.com/hyperpolymath/cargo-zigbuild")
-  (license mpl2.0))
+  (license ((@@ (guix licenses) license) "MPL-2.0" "https://github.com/hyperpolymath/palimpsest-license")))
