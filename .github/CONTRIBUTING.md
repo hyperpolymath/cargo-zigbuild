@@ -10,7 +10,7 @@ git clone https://github.com/hyperpolymath/cargo-zigbuild.git
 cd cargo-zigbuild
 
 # Using Guix (recommended for reproducibility)
-guix shell -D -f guix.scm
+guix shell -D -f build/guix.scm
 
 # Or using toolbox/distrobox
 toolbox create cargo-zigbuild-dev
