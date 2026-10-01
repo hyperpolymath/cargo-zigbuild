@@ -125,6 +125,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 [optional body]
 
 [optional footer]
+````
 
 ## Signed commits
 
